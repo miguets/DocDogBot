@@ -50,4 +50,11 @@ client.on("ready", () => {
 
     });//se pueden poner cualquier if pero tiene que ser antes de esta linea
 
-    client.login(token); // no tocar :v
+    //mensajes de bienvenida
+    client.on("guildMemberAdd", miembro =>{
+      var channel = client.channels.find(channel => channel-id === ("la id del canal a mandar el mensaje de bienvenida"))
+      channel.send("Bienvenido <@" + miembro.id + "> al sevidor :hot_face:  \n\n")
+    });
+
+    
+    client.login(token); //configurar token en config.json
