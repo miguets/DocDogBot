@@ -11,7 +11,7 @@ function presence(){
         status: "dnd",
         activity: {
             //nombre del juego
-            name: "Mainkra ( ͡° ͜ʖ ͡°)",
+            name: "romper culos ( ͡° ͜ʖ ͡°)",
             //accion (jugando)
             type: "PLAYING"
         }
@@ -24,10 +24,20 @@ client.on("ready", () => {
     presence();
  });
 
+client.on('guildMemberAdd', member => {
+  // Send the message to a designated channel on a server:
+  const channel = member.guild.channels.cache.find(ch => ch.name === '814208901687279640');
+  // Do nothing if the channel wasn't found on this server
+  if (!channel) return;
+  // Send the message, mentioning the member
+  channel.send(`Welcome to the server, ${member}`);
+});
+
+
   client.on("message", (message) => {
     //poner en chat: k
     if(message.content.startsWith("k")){
-     message.channel.send("webos al soria");
+     message.channel.send("k");
     }
     //poner en chat: orale @user
     if(message.content.startsWith("orale")){
@@ -47,14 +57,30 @@ client.on("ready", () => {
     if(message.content.startsWith("no?")){
         message.channel.send("ci :D");
     }
-
-    });//se pueden poner cualquier if pero tiene que ser antes de esta linea
-
-    //mensajes de bienvenida
-    client.on("guildMemberAdd", miembro =>{
-      var channel = client.channels.find(channel => channel-id === ("la id del canal a mandar el mensaje de bienvenida"))
-      channel.send("Bienvenido <@" + miembro.id + "> al sevidor :hot_face:  \n\n")
-    });
-
+    }); //se pueden poner cualquier if pero tiene que ser antes de esta linea
     
-    client.login(token); //configurar token en config.json
+    const Distube = require("distube")
+    client.distube = new Distube(client,{
+      emitNewSongonly: true,
+      serachSongs: false,
+      leaveOnStop: true,
+      leaveOnFinish: true,
+      leaveOnEmpty: true
+    });
+    client.distube.on("addlist",(playlist) => {
+      message.channel.send('xd')
+    })
+    client.distube.on("addsong",(song)=>{
+      message.channel.send('xd')
+    })
+    client.distube.on("playsong",(playsong)=>{
+      message.channel.send('xd')
+    })
+    client.distube.on("playlist",(playlist)=>{
+      message.channel.send('xd')
+    })
+    client.distube.on("error",(error)=>{
+      message.channel.send('xd')
+    })
+
+    client.login(token); 
